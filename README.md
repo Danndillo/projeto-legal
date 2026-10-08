@@ -1,2 +1,1 @@
-# projeto-legal
-web scraping
+# Hub de Estágios usando Web Scraping
