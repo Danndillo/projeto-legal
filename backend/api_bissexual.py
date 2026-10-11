@@ -1,6 +1,5 @@
-from flask import render_template
+from flask import Flask, render_template, jsonify
 import requests
-from flask import Flask
 
 app = Flask(__name__)
 
@@ -38,6 +37,16 @@ def get_estagios_data():
         return data
     else:
         return None
+
+@app.route('/api/teste')
+def teste_cia_estagio():
+    url = 'https://sgce.ciadeestagios.com.br/api/listar.vagas.publicas'
+    r = requests.get(url)
+    
+    return jsonify({
+        'status': r.status_code,
+        'data': r.json() if r.headers.get('content-type', '').startswith('application/json') else r.text[:500]
+    })
 
 if __name__ == '__main__':
     app.run()
