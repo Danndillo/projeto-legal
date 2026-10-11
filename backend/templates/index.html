@@ -4,28 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hub de Vagas</title>
-    <script defer>
-        fetch('/api/vagas', {
-            method:'POST', 
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify({locale: 'pt'})
-        }).then(response => response.json().then(data => ({
-        data: data,
-        status: response.status
-    })
-).then(res => {
-    res.data.forEach(vaga => {
-        console.log(vaga.opportunityName)    
-    });
-    
-}));
-
-    </script>
 </head>
 <body>
-    <div>Oi</div>
-</body>
+    <div id="paraAppend">Oi</div>
+
+<script>
+
+fetch('/api/vagas', {
+    method:'POST', 
+    headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+    },
+    body: JSON.stringify({locale: 'pt'})
+    }) //Faz a requisição pra nossa API, se tu reparar é igualzinho ao que a API do ciadeTalentos faz
+    .then(response => response.json().then(data => ({data: data,status: response.status}))) //Aqui eu peguei do stack overflow
+    .then(res => {//Em resumo, ele pega a promisse e docompoe ela em um array de JSON
+        res.data.forEach(vaga => {//Aqui pega cada vaga e transforma o titulo dela em um elemento <p> do HTML 
+            const elemento = document.createElement("p")
+            elemento.innerText = vaga.opportunityName
+            document.getElementById("paraAppend").appendChild(elemento);
+        });
+    
+    })
+    .catch(err => console.error('Erro:', err));
+
+    </script>
+
+    </body>
+
 </html>
