@@ -1,3 +1,4 @@
+from flask import render_template
 import requests
 from flask import Flask
 
@@ -5,9 +6,9 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello_world():
-    return '<h1>Hello World!</h1>'
+    return render_template('index.html')
 
-@app.route('/api/vagas')
+@app.route('/api/vagas', methods=['GET', 'POST'])
 def get_estagios_data():
     url = 'https://vagas.ciadetalentos.com.br/applicant/rest/applicant/authentication/filter'
     headers = {
