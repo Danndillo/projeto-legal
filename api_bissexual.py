@@ -7,7 +7,7 @@ app = Flask(__name__)
 def hello_world():
     return '<h1>Hello World!</h1>'
 
-@app.route('api/vagas')
+@app.route('/api/vagas')
 def get_estagios_data():
     url = 'https://vagas.ciadetalentos.com.br/applicant/rest/applicant/authentication/filter'
     headers = {
