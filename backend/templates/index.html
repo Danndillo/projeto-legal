@@ -4,8 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hub de Vagas</title>
-    <script>
-        console.log(fetch('/api/vagas'))
+    <script defer>
+        fetch('/api/vagas', {
+            method:'POST', 
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({locale: 'pt'})
+        }).then(response => response.json().then(data => ({
+        data: data,
+        status: response.status
+    })
+).then(res => {
+    res.data.forEach(vaga => {
+        console.log(vaga.opportunityName)    
+    });
+    
+}));
+
     </script>
 </head>
 <body>
