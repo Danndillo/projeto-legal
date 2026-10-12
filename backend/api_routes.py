@@ -4,7 +4,7 @@ import requests
 app = Flask(__name__)
 
 @app.route('/')
-def hello_world():
+def runDevilRun():
     return render_template('index.html')
 
 @app.route('/api/vagas', methods=['GET', 'POST'])
